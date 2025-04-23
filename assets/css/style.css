@@ -1,0 +1,25 @@
+#distribution {
+    padding: 4rem 0;
+    background-color: #f8f9fa;
+}
+
+#distribution .section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #2e7d32;
+}
+
+.distribution-map {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.distribution-map img {
+    width: 100%;
+    height: auto;
+    display: block;
+} 
