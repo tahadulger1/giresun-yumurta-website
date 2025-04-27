@@ -213,16 +213,17 @@
             <h2 class="text-center mb-4 mb-md-5">İletişim</h2>
             <div class="row g-4">
                 <div class="col-12 col-md-6">
-                    <form class="contact-form">
+                    <form class="contact-form" id="contactForm">
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Adınız" required>
+                            <input type="text" class="form-control" name="name" placeholder="Adınız" required>
                         </div>
                         <div class="mb-3">
-                            <input type="tel" class="form-control" placeholder="Telefon Numaranız" required>
+                            <input type="tel" class="form-control" name="phone" placeholder="Telefon Numaranız" required>
                         </div>
                         <div class="mb-3">
-                            <textarea class="form-control" rows="5" placeholder="Mesajınız" required></textarea>
+                            <textarea class="form-control" name="message" rows="5" placeholder="Mesajınız" required></textarea>
                         </div>
+                        <div id="formFeedback" class="alert d-none mb-3"></div>
                         <button type="submit" class="btn btn-primary w-100">Gönder</button>
                     </form>
                 </div>
@@ -300,6 +301,54 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // Form işleme
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const form = this;
+            const feedback = document.getElementById('formFeedback');
+            const submitButton = form.querySelector('button[type="submit"]');
+            
+            // Form verilerini topla
+            const formData = new FormData(form);
+            
+            // Butonu devre dışı bırak
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Gönderiliyor...';
+            
+            // AJAX isteği
+            fetch('process_form_smtp.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Geri bildirim göster
+                feedback.classList.remove('d-none', 'alert-success', 'alert-danger');
+                feedback.classList.add(data.success ? 'alert-success' : 'alert-danger');
+                feedback.textContent = data.message;
+                
+                if (data.success) {
+                    form.reset();
+                }
+            })
+            .catch(error => {
+                feedback.classList.remove('d-none', 'alert-success');
+                feedback.classList.add('alert-danger');
+                feedback.textContent = 'Bir hata oluştu. Lütfen daha sonra tekrar deneyin.';
+            })
+            .finally(() => {
+                // Butonu tekrar aktif et
+                submitButton.disabled = false;
+                submitButton.innerHTML = 'Gönder';
+                
+                // 5 saniye sonra geri bildirimi gizle
+                setTimeout(() => {
+                    feedback.classList.add('d-none');
+                }, 5000);
+            });
+        });
+
         // Yukarı çıkma butonu için JavaScript
         const backToTopButton = document.getElementById('backToTop');
         
