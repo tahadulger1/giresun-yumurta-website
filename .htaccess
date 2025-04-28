@@ -1,0 +1,44 @@
+# HTTPS Yönlendirmesi
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Güvenlik Başlıkları
+<IfModule mod_headers.c>
+    # XSS Koruması
+    Header set X-XSS-Protection "1; mode=block"
+    
+    # Clickjacking Koruması
+    Header set X-Frame-Options "SAMEORIGIN"
+    
+    # MIME-Type Sniffing Koruması
+    Header set X-Content-Type-Options "nosniff"
+    
+    # Referrer Policy
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Content Security Policy
+    Header set Content-Security-Policy "default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval';"
+    
+    # HSTS (HTTP Strict Transport Security)
+    Header set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
+
+# Dizin Listeleme Kapatma
+Options -Indexes
+
+# PHP Dosyalarının Doğrudan Erişimini Engelleme
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Hassas Dosyaları Koruma
+<FilesMatch "^(wp-config\.php|php\.ini|\.htaccess|robots\.txt)">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# PHP Hata Mesajlarını Gizleme
+php_flag display_errors off
+php_value error_reporting 0 

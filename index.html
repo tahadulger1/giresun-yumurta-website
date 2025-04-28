@@ -7,9 +7,20 @@
     
     <!-- SEO Meta Etiketleri -->
     <meta name="description" content="Giresun Yumurta - 20 yıllık tecrübemizle Giresun ve çevresine en taze, doğal ve kaliteli yumurta tedariği sağlıyoruz. Large boy sarı ve beyaz yumurtalar.">
-    <meta name="keywords" content="giresun yumurta, taze yumurta, doğal yumurta, yumurta tedariği, giresun, ordu, amasya">
+    <meta name="keywords" content="giresun yumurta, taze yumurta, doğal yumurta, yumurta tedariği, giresun, ordu, amasya, kozlu yumurta, yumurta toptancısı, yumurta satışı">
     <meta name="author" content="Giresun Yumurta">
     <meta name="robots" content="index, follow">
+    <meta name="language" content="Turkish">
+    <meta name="revisit-after" content="7 days">
+    <meta name="distribution" content="global">
+    <meta name="rating" content="general">
+    <meta name="geo.region" content="TR-28">
+    <meta name="geo.placename" content="Giresun">
+    <meta name="geo.position" content="40.9081009;38.3566685">
+    <meta name="ICBM" content="40.9081009, 38.3566685">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://giresunyumurta.com">
     
     <!-- Open Graph Meta Etiketleri -->
     <meta property="og:title" content="Giresun Yumurta - Doğal ve Taze Yumurta Tedariği">
@@ -39,6 +50,50 @@
       gtag('js', new Date());
       gtag('config', 'G-9NF9L7PCJ0');
     </script>
+
+    <!-- Schema.org Yapısal Veri -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Giresun Yumurta",
+      "image": "https://giresunyumurta.com/images/logo.png",
+      "description": "20 yıllık tecrübemizle Giresun ve çevresine en taze, doğal ve kaliteli yumurta tedariği sağlıyoruz.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Çıtlakkale, Petek Sk. No:13 D:11",
+        "addressLocality": "Giresun Merkez",
+        "addressRegion": "Giresun",
+        "postalCode": "28200",
+        "addressCountry": "TR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 40.9081009,
+        "longitude": 38.3566685
+      },
+      "url": "https://giresunyumurta.com",
+      "telephone": "+905433433192",
+      "email": "giresunyumurta@hotmail.com",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "opens": "08:00",
+        "closes": "18:00"
+      },
+      "priceRange": "₺₺",
+      "sameAs": [
+        "https://www.instagram.com/giresunyumurta/"
+      ]
+    }
+    </script>
 </head>
 <body>
     <!-- Navbar -->
@@ -60,9 +115,6 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#urunler" aria-label="Ürünlerimiz sayfasına git">Ürünlerimiz</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#dagitim" aria-label="Dağıtım sayfasına git">Dağıtım</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#sertifikalar" aria-label="Sertifikalarımız sayfasına git">Sertifikalarımız</a>
@@ -222,15 +274,25 @@
             <h2 class="text-center mb-4 mb-md-5">İletişim</h2>
             <div class="row g-4">
                 <div class="col-12 col-md-6">
-                    <form class="contact-form" id="contactForm">
+                    <form class="contact-form" id="contactForm" method="POST" action="process_form_smtp.php">
+                        <input type="hidden" name="csrf_token" value="<?php echo bin2hex(random_bytes(32)); ?>">
                         <div class="mb-3">
-                            <input type="text" class="form-control" name="name" placeholder="Adınız" required>
+                            <input type="text" class="form-control" name="name" placeholder="Adınız" required 
+                                   pattern="[A-Za-zğüşıöçĞÜŞİÖÇ\s]{2,50}" 
+                                   title="Lütfen geçerli bir isim giriniz (2-50 karakter, sadece harf)">
                         </div>
                         <div class="mb-3">
-                            <input type="tel" class="form-control" name="phone" placeholder="Telefon Numaranız" required>
+                            <input type="tel" class="form-control" name="phone" placeholder="Telefon Numaranız" required
+                                   pattern="[0-9]{10,15}"
+                                   title="Lütfen geçerli bir telefon numarası giriniz">
                         </div>
                         <div class="mb-3">
-                            <textarea class="form-control" name="message" rows="5" placeholder="Mesajınız" required></textarea>
+                            <textarea class="form-control" name="message" rows="5" placeholder="Mesajınız" required
+                                      maxlength="1000"
+                                      title="Lütfen mesajınızı giriniz (maksimum 1000 karakter)"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <div class="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_SITE_KEY"></div>
                         </div>
                         <div id="formFeedback" class="alert d-none mb-3"></div>
                         <button type="submit" class="btn btn-primary w-100">Gönder</button>
@@ -280,7 +342,6 @@
                         <li class="mb-2"><a href="#anasayfa" class="text-white-50 text-decoration-none">Anasayfa</a></li>
                         <li class="mb-2"><a href="#hakkimizda" class="text-white-50 text-decoration-none">Hakkımızda</a></li>
                         <li class="mb-2"><a href="#urunler" class="text-white-50 text-decoration-none">Ürünlerimiz</a></li>
-                        <li class="mb-2"><a href="#dagitim" class="text-white-50 text-decoration-none">Dağıtım</a></li>
                         <li class="mb-2"><a href="#sertifikalar" class="text-white-50 text-decoration-none">Sertifikalarımız</a></li>
                         <li class="mb-2"><a href="#iletisim" class="text-white-50 text-decoration-none">İletişim</a></li>
                     </ul>
