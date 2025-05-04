@@ -1,23 +1,23 @@
-name: Deploy to Production
+name: Otomatik Deploy
 
 on:
   push:
     branches:
       - master
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      
-      - name: Deploy to Server
-        uses: appleboy/ssh-action@master
+      - name: Kodu çek
+        uses: actions/checkout@v3
+
+      - name: Sunucuya Deploy Et
+        uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_SSH_KEY }}
-          script: |
-            cd /var/www/giresunyumurta.com
-            git pull origin master
-            sudo systemctl restart nginx 
+          source: "."
+          target: "/var/www/html/giresunyumurta" 
