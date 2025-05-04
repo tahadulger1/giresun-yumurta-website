@@ -244,6 +244,27 @@
             padding-top: 0.5rem;
             padding-bottom: 0.5rem;
         }
+        .hero-section {
+            position: relative;
+            background: #888;
+            overflow: hidden;
+        }
+        .hero-bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.18;
+            z-index: 1;
+            pointer-events: none;
+            filter: blur(2px);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
     </style>
 </head>
 <body>
@@ -318,7 +339,8 @@
 
     <!-- Hero Section -->
     <section id="anasayfa" class="hero-section" role="banner" aria-label="Ana sayfa banner">
-        <div class="container">
+        <img src="images/depo önü yeni hali.png" alt="Depo önü" class="hero-bg-image">
+        <div class="container hero-content">
             <div class="row align-items-center min-vh-100">
                 <div class="col-lg-6">
                     <h1 class="display-4 fw-bold">Doğal, Taze ve Güvenilir Yumurta</h1>
