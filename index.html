@@ -25,12 +25,12 @@
     <!-- Open Graph Meta Etiketleri -->
     <meta property="og:title" content="Giresun Yumurta - Doğal ve Taze Yumurta Tedariği">
     <meta property="og:description" content="20 yıllık tecrübemizle Giresun ve çevresine en taze, doğal ve kaliteli yumurta tedariği sağlıyoruz.">
-    <meta property="og:image" content="images/logo.png">
+    <meta property="og:image" content="images/giresunyumurta-logo.png">
     <meta property="og:url" content="https://giresunyumurta.com">
     <meta property="og:type" content="website">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="icon" type="image/png" href="images/giresunyumurta-logo.png">
     
     <!-- Preload Kritik Kaynaklar -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" as="style" onload="this.rel='stylesheet'">
@@ -61,7 +61,7 @@
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "name": "Giresun Yumurta",
-      "image": "https://giresunyumurta.com/images/logo.png",
+      "image": "https://giresunyumurta.com/images/giresunyumurta-logo.png",
       "description": "20 yıllık tecrübemizle Giresun ve çevresine en taze, doğal ve kaliteli yumurta tedariği sağlıyoruz.",
       "address": {
         "@type": "PostalAddress",
@@ -184,6 +184,66 @@
                 padding-right: 0;
             }
         }
+
+        .whatsapp-float {
+            position: fixed;
+            width: 56px;
+            height: 56px;
+            bottom: 24px;
+            right: 24px;
+            background-color: #25D366;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1100;
+            font-size: 2rem;
+            transition: background 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+        }
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            color: #fff;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.22);
+        }
+        @media (max-width: 767.98px) {
+            .whatsapp-float {
+                width: 44px;
+                height: 44px;
+                font-size: 1.5rem;
+                bottom: 16px;
+                right: 16px;
+            }
+        }
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: auto;
+            padding: 0 1.5rem 0 0;
+            margin: 0;
+        }
+        .navbar-brand img {
+            max-height: 80px;
+            height: 64px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+            image-rendering: auto;
+        }
+        @media (max-width: 991.98px) {
+            .navbar-brand img {
+                max-height: 56px;
+                height: 44px;
+            }
+        }
+        .navbar {
+            min-height: 80px;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
     </style>
 </head>
 <body>
@@ -229,7 +289,7 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" role="navigation" aria-label="Ana navigasyon">
         <div class="container">
             <a class="navbar-brand" href="#" aria-label="Giresun Yumurta Ana Sayfa">
-                <img src="images/logo.png" alt="Giresun Yumurta Logo" height="50">
+                <img src="images/giresunyumurta-logo.png" alt="Giresun Yumurta Logo">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Menüyü aç/kapat">
                 <span class="navbar-toggler-icon"></span>
@@ -448,6 +508,11 @@
             </div>
         </div>
     </section>
+
+    <!-- WhatsApp Sabit Buton -->
+    <a href="https://wa.me/905433433192" class="whatsapp-float" target="_blank" aria-label="WhatsApp ile iletişime geç">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
     <!-- Footer -->
     <footer class="py-4 py-md-5">
