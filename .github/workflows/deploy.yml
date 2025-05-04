@@ -20,4 +20,4 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           source: "."
-          target: "/var/www/html/giresunyumurta" 
+          target: "/var/www/giresunyumurta.com" 
