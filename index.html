@@ -457,30 +457,19 @@
             <div class="row g-4">
                 <div class="col-md-6">
                     <div class="contact-form-wrapper">
-                        <form class="contact-form" id="contactForm" method="POST" action="process_form_smtp.php">
-                            <input type="hidden" name="csrf_token" value="<?php echo bin2hex(random_bytes(32)); ?>">
+                        <form class="contact-form" id="contactForm" method="POST" action="https://formspree.io/f/mrbqkbqo">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Adınız" required 
-                                       pattern="[A-Za-zğüşıöçĞÜŞİÖÇ\s]{2,50}" 
-                                       title="Lütfen geçerli bir isim giriniz (2-50 karakter, sadece harf)">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Adınız" required>
                                 <label for="name">Adınız</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Telefon Numaranız" required
-                                       pattern="^(\+?\d{10,14})$"
-                                       title="Lütfen geçerli bir telefon numarası giriniz. Örnek: 05413334444 veya +905413334444">
-                                <label for="phone">Telefon Numaranız</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="E-posta Adresiniz" required>
+                                <label for="email">E-posta Adresiniz</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <textarea class="form-control" id="message" name="message" placeholder="Mesajınız" required
-                                          maxlength="1000" style="height: 150px"
-                                          title="Lütfen mesajınızı giriniz (maksimum 1000 karakter)"></textarea>
+                                <textarea class="form-control" id="message" name="message" placeholder="Mesajınız" required maxlength="1000" style="height: 150px"></textarea>
                                 <label for="message">Mesajınız</label>
                             </div>
-                            <div class="mb-3">
-                                <div class="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_SITE_KEY"></div>
-                            </div>
-                            <div id="formFeedback" class="alert d-none mb-3"></div>
                             <button type="submit" class="btn btn-primary btn-lg w-100">Gönder</button>
                         </form>
                     </div>
@@ -544,7 +533,7 @@
                     <ul class="list-unstyled text-white-50 mb-0">
                         <li class="mb-3 d-flex align-items-start">
                             <i class="fas fa-map-marker-alt mt-1 me-2"></i>
-                            <span>Çıtlakkale, Petek Sk. No:13 D:11, 28200 Giresun Merkez/Giresun</span>
+                            <span>Çıtlakkale, Petek Sk. No:13 D:11, 28200 Merkez/Giresun</span>
                         </li>
                         <li class="mb-3 d-flex align-items-center">
                             <i class="fas fa-phone me-2"></i>
