@@ -50,45 +50,13 @@ window.addEventListener('scroll', function() {
 });
 
 // Form Submission
-const contactForm = document.querySelector('.contact-form');
-if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Form verilerini al
-        const formData = new FormData(this);
-        
-        // Loading durumunu göster
-        const submitButton = this.querySelector('button[type="submit"]');
-        const originalButtonText = submitButton.innerHTML;
-        submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Gönderiliyor...';
-        submitButton.disabled = true;
-        
-        // AJAX isteği gönder
-        fetch('process_form_smtp.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Geri bildirim mesajını göster
-            showFeedbackMessage(data.success, data.message);
-            
-            if (data.success) {
-                // Form başarıyla gönderildiyse formu temizle
-                this.reset();
-            }
-        })
-        .catch(error => {
-            showFeedbackMessage(false, 'Bir hata oluştu. Lütfen daha sonra tekrar deneyin.');
-        })
-        .finally(() => {
-            // Loading durumunu kaldır
-            submitButton.innerHTML = originalButtonText;
-            submitButton.disabled = false;
-        });
-    });
-}
+// const contactForm = document.querySelector('.contact-form');
+// if (contactForm) {
+//     contactForm.addEventListener('submit', function(e) {
+//         e.preventDefault();
+//         // ... (tüm fetch ve feedback kodları)
+//     });
+// }
 
 // Geri bildirim mesajını gösteren fonksiyon
 function showFeedbackMessage(success, message) {
