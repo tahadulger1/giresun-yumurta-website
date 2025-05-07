@@ -31,6 +31,7 @@ body {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    line-height: 1.6;
 }
 
 /* Lazy Loading Görseller */
@@ -64,6 +65,26 @@ img[loading="lazy"].loaded {
     display: flex;
     align-items: center;
     animation: fadeIn 1s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.18;
+    z-index: 1;
+    pointer-events: none;
+    filter: blur(2px);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
 }
 
 /* CSS Animasyonları için Performans Optimizasyonu */
@@ -163,6 +184,7 @@ img[loading="lazy"].loaded {
     background-color: var(--text-light) !important;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     z-index: 1000;
+    transition: all 0.3s ease;
 }
 
 .navbar-brand img {
@@ -181,9 +203,9 @@ img[loading="lazy"].loaded {
 
 /* Ürün Kartları */
 .product-card {
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: none;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 15px rgba(0,0,0,.1);
     border-radius: 10px;
     overflow: hidden;
     opacity: 0;
@@ -204,6 +226,7 @@ img[loading="lazy"].loaded {
 
 .product-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0,0,0,.15);
 }
 
 .product-card img {
@@ -373,17 +396,15 @@ footer a:hover {
 
 .partners-track {
     display: flex;
-    animation: slidePartners 45s linear infinite;
+    animation: scroll 30s linear infinite;
     width: fit-content;
 }
 
 .partner-item {
     flex: 0 0 auto;
-    padding: 0 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 280px;
+    padding: 1rem;
+    text-align: center;
+    min-width: 200px;
 }
 
 .partner-item img {
@@ -417,7 +438,7 @@ footer a:hover {
     opacity: 1;
 }
 
-@keyframes slidePartners {
+@keyframes scroll {
     0% {
         transform: translateX(0);
     }
@@ -429,9 +450,9 @@ footer a:hover {
 /* Sertifikalar Bölümü Stilleri */
 .certificate-card {
     background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
     height: 100%;
     transition: transform 0.3s ease;
 }
@@ -443,14 +464,9 @@ footer a:hover {
 .certificate-placeholder {
     background: #f8f9fa;
     border-radius: 8px;
-    padding: 30px;
+    padding: 2rem;
     text-align: center;
-    margin-bottom: 15px;
-    min-height: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    margin-bottom: 1rem;
 }
 
 .certificate-placeholder i {
@@ -469,7 +485,7 @@ footer a:hover {
 
 .certificate-info h5 {
     color: #333;
-    margin-bottom: 5px;
+    margin-bottom: 0.5rem;
 }
 
 .certificate-info p {
@@ -738,50 +754,52 @@ a {
 .back-to-top {
     position: fixed;
     bottom: 30px;
-    right: 30px;
-    background: var(--primary-green);
-    color: white;
-    width: 50px;
-    height: 50px;
+    right: 100px;
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #4ECDC4 0%, #25D366 100%);
+    color: #fff;
     border-radius: 50%;
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
     z-index: 1000;
+    box-shadow: 0 6px 24px rgba(78,205,196,0.18), 0 1.5px 6px rgba(37,211,102,0.12);
+    transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+    font-size: 2rem;
+    border: none;
+    outline: none;
 }
 
 .back-to-top:hover {
-    transform: translateY(-5px);
-    color: white;
-    background: var(--primary-green-dark);
+    background: linear-gradient(135deg, #25D366 0%, #4ECDC4 100%);
+    color: #fff;
+    box-shadow: 0 12px 32px rgba(78,205,196,0.25), 0 3px 12px rgba(37,211,102,0.18);
+    transform: translateY(-4px) scale(1.08);
 }
 
 /* Mobil için düzenlemeler */
 @media (max-width: 767.98px) {
     .back-to-top {
-        bottom: 20px;
-        right: 20px;
-        width: 40px;
-        height: 40px;
+        bottom: 16px;
+        right: 16px;
     }
 }
 
 /* Mobil için düzenlemeler */
 @media (max-width: 767.98px) {
-    .partners-section {
-        padding: 30px 0;
+    .navbar-brand img {
+        max-height: 56px;
+        height: 44px;
     }
 
-    .partner-item {
-        padding: 0 35px;
-        min-width: 220px;
-    }
-
-    .partner-item h4 {
-        font-size: 1.1rem;
+    .whatsapp-float {
+        width: 44px;
+        height: 44px;
+        font-size: 1.5rem;
+        bottom: 16px;
+        right: 16px;
     }
 }
 
@@ -863,4 +881,29 @@ section[id] {
         left: 10px;
         max-width: none;
     }
+}
+
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25D366;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 2.5rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+    text-decoration: none !important;
+}
+.whatsapp-float:hover {
+    background: #128C7E;
+    color: #fff;
+    text-decoration: none !important;
 } 
